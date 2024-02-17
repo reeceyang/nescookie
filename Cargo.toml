@@ -9,8 +9,8 @@ repository = "https://github.com/snylonue/nescookie"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-cookie = "0.15"
-time = "0.2.27"
+cookie = "0.16"
+time = "^0.3"
 
 [dev-dependencies]
 criterion = "0.3"

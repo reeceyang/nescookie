@@ -10,6 +10,7 @@ use std::{
     io::{BufRead, BufReader},
     path::Path,
 };
+pub use time::Duration;
 pub use time::OffsetDateTime;
 
 /// A netscape cookie parser
@@ -101,7 +102,8 @@ impl CookieJarBuilder {
                 .secure(secure)
                 .expires(match expiration {
                     0 => None,
-                    exp => Some(OffsetDateTime::from_unix_timestamp(exp)),
+                    // HACK: idk why from_unix_timestamp doesn't work but this seems to work
+                    exp => OffsetDateTime::UNIX_EPOCH.checked_add(Duration::seconds(exp)),
                 });
             let cookie = if http_only {
                 cookie.http_only(true).finish()
